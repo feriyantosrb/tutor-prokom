@@ -1,4 +1,3 @@
-from PIL.Image import ROTATE_90
 import streamlit as st
 import numpy as np
 import pandas as pd
@@ -54,7 +53,7 @@ st.header('Produksi Minyak Mentah')
 ch_ = csvHandler('produksi_minyak_mentah.csv')
 jh_ = jsonHandler('kode_negara_lengkap.json')
 
-#bagian a
+#--Poin (a)--
 df_ = ch_.dataFrame
 df_info = jh_.dataFrame
 negara_li = df_info['name'].tolist()
@@ -84,20 +83,9 @@ else:
 dic = {'tahun':x_,'produksi':y_}
 st.write(pd.DataFrame(dic))
 
-plotting = st.selectbox('Pilih tipe plotting : ',['tipe 1','tipe 2'])
-
-if plotting == 'tipe 1':
-    plt.title('Data Produksi {}'.format(negara))
-    plt.plot(x_,y_,label='Actual')
-    plt.plot(x_,y_trend,label='Trendline\n{}'.format(equation))
-    plt.xlabel('Tahun')
-    plt.ylabel('Produksi')
-    plt.legend()
-    st.pyplot(plt)
-else:
-    dic['trendline'] = y_trend
-    fig = px.scatter(pd.DataFrame(dic),x='tahun',y='produksi',trendline='lowess',trendline_options=dict(frac=0.1))
-    st.plotly_chart(fig)
+dic['trendline'] = y_trend
+fig = px.scatter(pd.DataFrame(dic),x='tahun',y='produksi',trendline='lowess',trendline_options=dict(frac=0.1))
+st.plotly_chart(fig)
 
 #--Poin (b)--
 st.write()
@@ -105,7 +93,7 @@ st.write()
 st.header('JUMLAH PRODUKSI MINYAK MENTAH TERBESAR')
 
 
-B = st.sidebar.number_input("Berapa besar negara dengan produksi terbesar?", min_value=1, max_value=None)
+B = st.sidebar.number_input("Berapa besar negara?", min_value=1, max_value=None)
 T = st.sidebar.number_input("Tahun produksi", min_value=1971, max_value=2015)
 
 df = df_
@@ -184,13 +172,13 @@ plt.title('{B} Negara dengan Produksi Terbesar Kumulatif'.format(B=B_))
 plt.bar(df__['negara'][:B_],df__['produksi_total'][:B_],width=0.9, bottom=None, align="center",
             color="lightblue", edgecolor="aquamarine", data=None, zorder=3)
 plt.grid(True, color="grey", linewidth="0.7", linestyle="-.", zorder=0)
-plt.xlabel('negara',ROTATE_90)
+plt.xlabel('negara',rotate=90)
 plt.ylabel('produksi_total')
 
 st.write('Input banyak negara')
 st.pyplot(plt)
 
-#--Poin (d)--#
+#--Poin (d)--
 st.write()
 st.write()
 st.header('INFORMASI')
