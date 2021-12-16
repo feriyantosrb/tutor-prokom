@@ -55,7 +55,6 @@ ch_ = csvHandler('produksi_minyak_mentah.csv')
 jh_ = jsonHandler('kode_negara_lengkap.json')
 
 st.sidebar.title("Pengaturan")
-col1, col2, col3 = st.columns(3)
 
 #bagian a
 #col1
@@ -85,9 +84,9 @@ else:
     equation = 'y={m:.2f}x{c:.2f}'.format(m=m,c=c)
 
 dic = {'tahun':x_,'produksi':y_}
-col1.st.write(pd.DataFrame(dic))
+st.write(pd.DataFrame(dic))
 
-plotting = col1.st.selectbox('Pilih tipe plotting : ',['tipe 1','tipe 2'])
+plotting = st.selectbox('Pilih tipe plotting : ',['tipe 1','tipe 2'])
 
 if plotting == 'tipe 1':
     plt.title('Data Produksi {}'.format(negara))
@@ -104,7 +103,7 @@ else:
 
 #bagian b
 #col2
-col2.st.header('JUMLAH PRODUKSI MINYAK MENTAH TERBESAR')
+st.header('JUMLAH PRODUKSI MINYAK MENTAH TERBESAR')
 
 
 B = st.sidebar.number_input("Berapa besar negara?", min_value=1, max_value=None)
@@ -146,11 +145,11 @@ plt.xlabel('negara',rotate=45)
 plt.ylabel('produksi_maksimum')
 
 st.write('Input banyak negara dan tahun di kiri')
-col2.st.pyplot(plt)
+st.pyplot(plt)
 
 #bagian c
 #col3
-col3.st.header('JUMLAH PRODUKSI MINYAK MENTAH TERBESAR SECARA KUMULATIF KESELURUHAN TAHUN')
+st.header('JUMLAH PRODUKSI MINYAK MENTAH TERBESAR SECARA KUMULATIF KESELURUHAN TAHUN')
 
 
 B_ = st.sidebar.number_input("Berapa besar negara (Bagian C)?", min_value=1, max_value=None)
@@ -189,7 +188,7 @@ plt.xlabel('negara',rotate=45)
 plt.ylabel('produksi_total')
 
 st.write('Input banyak negara di sidebar kiri (Bagian C)')
-col3.st.pyplot(plt)
+st.pyplot(plt)
 
 #bagian d
 st.write()
