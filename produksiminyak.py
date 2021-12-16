@@ -84,7 +84,7 @@ dic = {'tahun':x_,'produksi':y_}
 st.write(pd.DataFrame(dic))
 
 dic['trendline'] = y_trend
-fig = px.scatter(pd.DataFrame(dic),x='tahun',y='produksi',trendline='lowess',trendline_options=dict(frac=0.1))
+fig = px.scatter(pd.DataFrame(dic),x='tahun',y='produksi',title='Data Produksi {}'.format(negara), trendline='lowess',trendline_options=dict(frac=0.1))
 st.plotly_chart(fig)
 
 #--Poin (b)--
