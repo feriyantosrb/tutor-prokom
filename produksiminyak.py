@@ -141,7 +141,7 @@ plt.title('{B} Negara dengan Produksi Terbesar pada Tahun {T}'.format(B=B,T=T))
 plt.bar(df__['negara'][:B],df__['produksi_maks'][:B],width=0.9, bottom=None, align="center",
             color="green", edgecolor="aquamarine", data=None, zorder=3)
 plt.grid(True, color="grey", linewidth="0.7", linestyle="-.", zorder=0)
-plt.xlabel('negara',rotatation=45)
+plt.xlabel('negara',rotation=45)
 plt.ylabel('produksi_maksimum')
 
 st.write('Input banyak negara dan tahun di kiri')
@@ -184,7 +184,7 @@ plt.title('{B} Negara dengan Produksi Terbesar Kumulatif'.format(B=B_))
 plt.bar(df__['negara'][:B_],df__['produksi_total'][:B_],width=0.9, bottom=None, align="center",
             color="green", edgecolor="aquamarine", data=None, zorder=3)
 plt.grid(True, color="grey", linewidth="0.7", linestyle="-.", zorder=0)
-plt.xlabel('negara',rotatation=45)
+plt.xlabel('negara',rotation=45)
 plt.ylabel('produksi_total')
 
 st.write('Input banyak negara di sidebar kiri (Bagian C)')
