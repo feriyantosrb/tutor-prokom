@@ -2,3 +2,5 @@ streamlit==1.2.0
 pandas
 numpy
 matplotlib
+https://towardsdatascience.com/deploy-a-public-streamlit-web-app-for-free-heres-how-bf56d46b2abe
+https://realpython.com/python-json/
