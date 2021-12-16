@@ -2,6 +2,7 @@ import streamlit as st
 from fileHandler import csvHandler,jsonHandler
 import numpy as np
 import pandas as pd
+import sklearn
 from sklearn.linear_model import LinearRegression
 import plotly.graph_objects as go
 import plotly.express as px
