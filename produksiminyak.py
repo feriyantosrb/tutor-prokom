@@ -91,18 +91,9 @@ left_col.dataframe(dic)
 
 plotting = left_col.selectbox('Pilih tipe plotting : ',['tipe 1','tipe 2'])
 
-if plotting == 'tipe 1':
-    plt.title('Data Produksi {}'.format(negara))
-    plt.plot(x_,y_,label='Actual')
-    plt.plot(x_,y_trend,label='Trendline\n{}'.format(equation))
-    plt.xlabel('Tahun')
-    plt.ylabel('Produksi')
-    plt.legend()
-    left_col.pyplot(plt)
-else:
-    dic['trendline'] = y_trend
-    fig = px.scatter(pd.DataFrame(dic),x='tahun',y='produksi',trendline='lowess',trendline_options=dict(frac=0.1),title='Data Produksi {}'.format(negara))
-    left_col.plotly_chart(fig)
+dic['trendline'] = y_trend
+fig = px.scatter(pd.DataFrame(dic),x='tahun',y='produksi',trendline='lowess',trendline_options=dict(frac=0.1),title='Data Produksi {}'.format(negara))
+left_col.plotly_chart(fig)
 
 #bagian b
 #col2
