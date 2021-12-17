@@ -52,7 +52,7 @@ class jsonHandler:
 st.set_page_config(layout="wide")
 
 st.title('PRODUKSI MINYAK MENTAH')
-#st.header('Feriyanto 12220007')
+st.header('Feriyanto 12220007')
 ch_ = csvHandler('produksi_minyak_mentah.csv')
 jh_ = jsonHandler('kode_negara_lengkap.json')
 
@@ -70,10 +70,6 @@ negara = st.selectbox('Pilih negara : ',negara_li)
 
 kode = df_info[df_info['name']==negara]['alpha-3'].tolist()[0]
 
-
-#left_col.subheader('Kode negara : ',kode)
-#left_col.subheader('Negara : ',negara)
-
 x_ = df_[df_['kode_negara']==kode]['tahun'].tolist()
 y_ = df_[df_['kode_negara']==kode]['produksi'].tolist()
 
@@ -82,18 +78,11 @@ reg.fit(np.array(x_).reshape(-1,1),np.array(y_))
 m = reg.coef_[0]
 c = reg.intercept_
 y_trend = [m*x+c for x in x_]
-if c >= 0:
-    equation = 'y={m:.2f}x+{c:.2f}'.format(m=m,c=c)
-else:
-    equation = 'y={m:.2f}x{c:.2f}'.format(m=m,c=c)
 
 dic = {'tahun':x_,'produksi':y_}
 left_col, right_col = st.columns([1,3])
 left_col.subheader("Tabel produksi minyak mentah ",negara)
 left_col.dataframe(dic)
-#st.write(pd.DataFrame(dic))
-
-#plotting = left_col.selectbox('Pilih tipe plotting : ',['tipe 1','tipe 2'])
 
 dic['trendline'] = y_trend
 fig = px.scatter(pd.DataFrame(dic),x='tahun',y='produksi',trendline='lowess',trendline_options=dict(frac=0.1))
@@ -179,13 +168,10 @@ df__ = df__.sort_values('produksi_total',ascending=False).reset_index()
 
 plt.clf() # clear the figure
 
-#tulisan nanti lu aja ya, gua update ke github dulu
-
 plt.title('{B} Negara dengan Produksi Terbesar Kumulatif'.format(B=B_))
 plt.bar(df__['negara'][:B_],df__['produksi_total'][:B_],width=0.9, bottom=None, align="center",
             color="green", edgecolor="aquamarine", data=None, zorder=3)
 plt.grid(True, color="grey", linewidth="0.7", linestyle="-.", zorder=0)
-#plt.xlabel()
 plt.ylabel('produksi_total')
 plt.xticks(rotation=30, ha='right')
 col2.pyplot(plt)
@@ -266,14 +252,14 @@ st.write(df_maks[df_maks['tahun']==T_])
 st.write('Tabel Maks per Tahun')
 st.write(df_maks)
 
-st.write('Info Produksi Minimum (Not Zero) Tahun ke-{}'.format(T_))
+st.write('Info Produksi Minimum (bukan nol) Tahun ke-{}'.format(T_))
 st.write(df_min[df_min['tahun']==T_])
 
-st.write('Tabel Min (Not Zero) per Tahun')
+st.write('Tabel Mininimum (bukan nol) per Tahun')
 st.write(df_min)
 
-st.write('Info Produksi Zero Tahun ke-{}'.format(T_))
+st.write('Info Produksi Nol Tahun ke-{}'.format(T_))
 st.write(df_zero[df_zero['tahun']==T_])
 
-st.write('Tabel Zero per Tahun')
+st.write('Tabel Produksi Nol per Tahun')
 st.write(df_zero)
