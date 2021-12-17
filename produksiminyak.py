@@ -48,7 +48,7 @@ class jsonHandler:
         self.dataFrame.to_csv('{}.csv'.format(csvFile),index=False)
 #end handler
 
-left_col, mid_col, right_col = st.columns(3)
+
 
 st.title('PRODUKSI MINYAK MENTAH')
 #st.header('Feriyanto 12220007')
@@ -56,7 +56,7 @@ ch_ = csvHandler('produksi_minyak_mentah.csv')
 jh_ = jsonHandler('kode_negara_lengkap.json')
 
 st.sidebar.title("Pengaturan")
-
+left_col, mid_col, right_col = st.columns(3)
 #bagian a
 #col1
 left_col.subheader('Bagian A')
@@ -86,7 +86,8 @@ else:
     equation = 'y={m:.2f}x{c:.2f}'.format(m=m,c=c)
 
 dic = {'tahun':x_,'produksi':y_}
-st.write(pd.DataFrame(dic))
+left_col.dataframe(dic)
+#st.write(pd.DataFrame(dic))
 
 plotting = left_col.selectbox('Pilih tipe plotting : ',['tipe 1','tipe 2'])
 
