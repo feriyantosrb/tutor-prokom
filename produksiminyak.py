@@ -66,9 +66,11 @@ st.header('Bagian A')
 df_ = ch_.dataFrame
 df_info = jh_.dataFrame
 negara_li = df_info['name'].tolist()
-negara = st.selectbox('Pilih negara : ',negara_li) 
-
+negara = st.selectbox('Pilih negara : ',negara_li)
 kode = df_info[df_info['name']==negara]['alpha-3'].tolist()[0]
+
+st.write('Kode negara : ',kode)
+st.write('Negara : ',negara)
 
 x_ = df_[df_['kode_negara']==kode]['tahun'].tolist()
 y_ = df_[df_['kode_negara']==kode]['produksi'].tolist()
