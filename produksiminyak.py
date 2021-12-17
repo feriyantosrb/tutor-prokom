@@ -78,11 +78,12 @@ y_ = df_[df_['kode_negara']==kode]['produksi'].tolist()
 reg = LinearRegression()
 if kode in x_:
     reg.fit(np.array(x_).reshape(-1,1),np.array(y_))
+    m = reg.coef_[0]
+    c = reg.intercept_
+    y_trend = [m*x+c for x in x_]
 else:
     st.write('Data tidak ditemukan')
-m = reg.coef_[0]
-c = reg.intercept_
-y_trend = [m*x+c for x in x_]
+
 
 dic = {'tahun':x_,'produksi':y_}
 left_col, right_col = st.columns([1,3])
