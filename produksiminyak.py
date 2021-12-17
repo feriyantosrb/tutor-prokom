@@ -86,7 +86,7 @@ else:
     equation = 'y={m:.2f}x{c:.2f}'.format(m=m,c=c)
 
 dic = {'tahun':x_,'produksi':y_}
-left_col, right_col = st.columns(1,3)
+left_col, right_col = st.columns([1,3])
 left_col.subheader("Tabel produksi minyak mentah ",negara)
 left_col.dataframe(dic)
 #st.write(pd.DataFrame(dic))
