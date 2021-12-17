@@ -50,7 +50,6 @@ class jsonHandler:
 
 left_col, mid_col, right_col = st.columns(3)
 
-st.set_page_config(layout="wide")  # this needs to be the first Streamlit command called
 st.title('PRODUKSI MINYAK MENTAH')
 st.header('Feriyanto 12220007')
 ch_ = csvHandler('produksi_minyak_mentah.csv')
