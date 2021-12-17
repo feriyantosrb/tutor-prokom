@@ -48,7 +48,7 @@ class jsonHandler:
         self.dataFrame.to_csv('{}.csv'.format(csvFile),index=False)
 #end handler
 
-
+st.set_page_config(layout="wide")  
 
 st.title('PRODUKSI MINYAK MENTAH')
 #st.header('Feriyanto 12220007')
