@@ -91,10 +91,11 @@ left_col.subheader("Tabel produksi minyak mentah ",negara)
 left_col.dataframe(dic)
 #st.write(pd.DataFrame(dic))
 
-plotting = left_col.selectbox('Pilih tipe plotting : ',['tipe 1','tipe 2'])
+#plotting = left_col.selectbox('Pilih tipe plotting : ',['tipe 1','tipe 2'])
 
 dic['trendline'] = y_trend
 fig = px.scatter(pd.DataFrame(dic),x='tahun',y='produksi',trendline='lowess',trendline_options=dict(frac=0.1),title='Data Produksi {}'.format(negara))
+right_col.subheader('Data Produksi',negara)
 right_col.plotly_chart(fig)
 
 #bagian b
@@ -139,7 +140,7 @@ plt.title('{B} Negara dengan Produksi Terbesar pada Tahun {T}'.format(B=B,T=T))
 plt.bar(df__['negara'][:B],df__['produksi_maks'][:B],width=0.9, bottom=None, align="center",
             color="green", edgecolor="aquamarine", data=None, zorder=3)
 plt.grid(True, color="grey", linewidth="0.7", linestyle="-.", zorder=0)
-plt.xlabel()
+#plt.xlabel()
 plt.ylabel('produksi_maksimum')
 plt.xticks(rotation=30, ha='right')
 
@@ -184,7 +185,7 @@ plt.title('{B} Negara dengan Produksi Terbesar Kumulatif'.format(B=B_))
 plt.bar(df__['negara'][:B_],df__['produksi_total'][:B_],width=0.9, bottom=None, align="center",
             color="green", edgecolor="aquamarine", data=None, zorder=3)
 plt.grid(True, color="grey", linewidth="0.7", linestyle="-.", zorder=0)
-plt.xlabel()
+#plt.xlabel()
 plt.ylabel('produksi_total')
 plt.xticks(rotation=30, ha='right')
 
