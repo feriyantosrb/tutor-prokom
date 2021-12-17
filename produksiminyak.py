@@ -48,7 +48,7 @@ class jsonHandler:
         self.dataFrame.to_csv('{}.csv'.format(csvFile),index=False)
 #end handler
 
-st.set_page_config(layout="wide")  
+st.set_page_config(layout="wide")
 
 st.title('PRODUKSI MINYAK MENTAH')
 #st.header('Feriyanto 12220007')
@@ -56,10 +56,11 @@ ch_ = csvHandler('produksi_minyak_mentah.csv')
 jh_ = jsonHandler('kode_negara_lengkap.json')
 
 st.sidebar.title("Pengaturan")
-left_col, mid_col, right_col = st.columns(3)
+left_col, right_col = st.columns(2)
+
+
 #bagian a
-#col1
-left_col.subheader('Bagian A')
+left_col.header('Bagian A')
 df_ = ch_.dataFrame
 df_info = jh_.dataFrame
 negara_li = df_info['name'].tolist()
@@ -69,8 +70,8 @@ negara = left_col.selectbox('Pilih negara : ',negara_li)
 kode = df_info[df_info['name']==negara]['alpha-3'].tolist()[0]
 
 
-#st.write('Kode negara : ',kode)
-#st.write('Negara : ',negara)
+left_col.subheader('Kode negara : ',kode)
+left_col.subheader('Negara : ',negara)
 
 x_ = df_[df_['kode_negara']==kode]['tahun'].tolist()
 y_ = df_[df_['kode_negara']==kode]['produksi'].tolist()
@@ -86,6 +87,7 @@ else:
     equation = 'y={m:.2f}x{c:.2f}'.format(m=m,c=c)
 
 dic = {'tahun':x_,'produksi':y_}
+left_col.subheader("Tabel produksi minyak mentah ",negara)
 left_col.dataframe(dic)
 #st.write(pd.DataFrame(dic))
 
@@ -93,15 +95,17 @@ plotting = left_col.selectbox('Pilih tipe plotting : ',['tipe 1','tipe 2'])
 
 dic['trendline'] = y_trend
 fig = px.scatter(pd.DataFrame(dic),x='tahun',y='produksi',trendline='lowess',trendline_options=dict(frac=0.1),title='Data Produksi {}'.format(negara))
-left_col.plotly_chart(fig)
+right_col.plotly_chart(fig)
 
 #bagian b
 #col2
-mid_col.subheader('JUMLAH PRODUKSI MINYAK MENTAH TERBESAR')
+st.write()
+st.write()
+left_col.header('Bagian B')
+left_col.subheader("Jumlah Produksi Minyak Mentah Terbesar")
 
-
-B = st.sidebar.number_input("Berapa besar negara?", min_value=1, max_value=None)
-T = st.sidebar.number_input("Tahun produksi", min_value=1971, max_value=2015)
+B = st.sidebar.number_input("Banyak negara dengan jumlah produksi terbesar (Bagian B)", min_value=1, max_value=None)
+T = st.sidebar.number_input("Tahun produksi (Bagian B)", min_value=1971, max_value=2015)
 
 df = df_
 dfJ = df_info
@@ -135,19 +139,20 @@ plt.title('{B} Negara dengan Produksi Terbesar pada Tahun {T}'.format(B=B,T=T))
 plt.bar(df__['negara'][:B],df__['produksi_maks'][:B],width=0.9, bottom=None, align="center",
             color="green", edgecolor="aquamarine", data=None, zorder=3)
 plt.grid(True, color="grey", linewidth="0.7", linestyle="-.", zorder=0)
-plt.xlabel('negara')
+plt.xlabel()
 plt.ylabel('produksi_maksimum')
 plt.xticks(rotation=30, ha='right')
 
 #st.write('Input banyak negara dan tahun di kiri')
-mid_col.pyplot(plt)
+left_col.pyplot(plt)
 
 #bagian c
 #col3
-right_col.subheader('JUMLAH PRODUKSI MINYAK MENTAH TERBESAR SECARA KUMULATIF KESELURUHAN TAHUN')
+st.write()
+right_col.subheader("Bagian C")
+right_col.subheader('Jumlah Produksi Terbesar Kumulatif Keseluruhan Tahun')
 
-
-B_ = st.sidebar.number_input("Berapa besar negara (Bagian C)?", min_value=1, max_value=None)
+B_ = st.sidebar.number_input("Banyak negara dengan produksi terbesar kumulatif (Bagian C)", min_value=1, max_value=None)
 
 df = df_
 dfJ = df_info
@@ -179,7 +184,7 @@ plt.title('{B} Negara dengan Produksi Terbesar Kumulatif'.format(B=B_))
 plt.bar(df__['negara'][:B_],df__['produksi_total'][:B_],width=0.9, bottom=None, align="center",
             color="green", edgecolor="aquamarine", data=None, zorder=3)
 plt.grid(True, color="grey", linewidth="0.7", linestyle="-.", zorder=0)
-plt.xlabel('negara')
+plt.xlabel()
 plt.ylabel('produksi_total')
 plt.xticks(rotation=30, ha='right')
 
@@ -189,6 +194,7 @@ right_col.pyplot(plt)
 #bagian d
 st.write()
 st.write()
+st.header('Bagian D')
 st.subheader('INFORMASI')
 
 T_ = st.sidebar.number_input("Summary Tahun Produksi", min_value=1971, max_value=2015)
