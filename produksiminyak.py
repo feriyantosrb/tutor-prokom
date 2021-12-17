@@ -76,7 +76,10 @@ x_ = df_[df_['kode_negara']==kode]['tahun'].tolist()
 y_ = df_[df_['kode_negara']==kode]['produksi'].tolist()
 
 reg = LinearRegression()
-reg.fit(np.array(x_).reshape(-1,1),np.array(y_))
+if kode in x_:
+    reg.fit(np.array(x_).reshape(-1,1),np.array(y_))
+else:
+    st.write('Data tidak ditemukan')
 m = reg.coef_[0]
 c = reg.intercept_
 y_trend = [m*x+c for x in x_]
@@ -84,10 +87,7 @@ y_trend = [m*x+c for x in x_]
 dic = {'tahun':x_,'produksi':y_}
 left_col, right_col = st.columns([1,3])
 left_col.subheader("Tabel produksi minyak mentah ",negara)
-if x_ and y_ not in dic:
-    st.write('Data ditemukan')
-else :
-    left_col.dataframe(dic)
+left_col.dataframe(dic)
 
 dic['trendline'] = y_trend
 fig = px.scatter(pd.DataFrame(dic),x='tahun',y='produksi',trendline='lowess',trendline_options=dict(frac=0.1))
