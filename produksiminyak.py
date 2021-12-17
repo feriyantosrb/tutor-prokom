@@ -56,22 +56,21 @@ ch_ = csvHandler('produksi_minyak_mentah.csv')
 jh_ = jsonHandler('kode_negara_lengkap.json')
 
 st.sidebar.title("Pengaturan")
-left_col, right_col = st.columns(2)
+
 
 
 #bagian a
-left_col.header('Bagian A')
+st.header('Bagian A')
 df_ = ch_.dataFrame
 df_info = jh_.dataFrame
 negara_li = df_info['name'].tolist()
-
-negara = left_col.selectbox('Pilih negara : ',negara_li) 
+negara = st.selectbox('Pilih negara : ',negara_li) 
 
 kode = df_info[df_info['name']==negara]['alpha-3'].tolist()[0]
 
 
-left_col.subheader('Kode negara : ',kode)
-left_col.subheader('Negara : ',negara)
+#left_col.subheader('Kode negara : ',kode)
+#left_col.subheader('Negara : ',negara)
 
 x_ = df_[df_['kode_negara']==kode]['tahun'].tolist()
 y_ = df_[df_['kode_negara']==kode]['produksi'].tolist()
@@ -87,6 +86,7 @@ else:
     equation = 'y={m:.2f}x{c:.2f}'.format(m=m,c=c)
 
 dic = {'tahun':x_,'produksi':y_}
+left_col, right_col = st.columns(1,3)
 left_col.subheader("Tabel produksi minyak mentah ",negara)
 left_col.dataframe(dic)
 #st.write(pd.DataFrame(dic))
@@ -96,14 +96,14 @@ left_col.dataframe(dic)
 dic['trendline'] = y_trend
 fig = px.scatter(pd.DataFrame(dic),x='tahun',y='produksi',trendline='lowess',trendline_options=dict(frac=0.1),title='Data Produksi {}'.format(negara))
 right_col.subheader('Data Produksi',negara)
+right_col.subheader('Grafik Data Produksi')
 right_col.plotly_chart(fig)
 
 #bagian b
 #col2
-st.write()
-st.write()
-left_col.header('Bagian B')
-left_col.subheader("Jumlah Produksi Minyak Mentah Terbesar")
+col1,col2=st.columns(2)
+col1.header('Bagian B')
+col1.subheader("Jumlah Produksi Minyak Mentah Terbesar")
 
 B = st.sidebar.number_input("Banyak negara dengan jumlah produksi terbesar (Bagian B)", min_value=1, max_value=None)
 T = st.sidebar.number_input("Tahun produksi (Bagian B)", min_value=1971, max_value=2015)
@@ -145,13 +145,12 @@ plt.ylabel('produksi_maksimum')
 plt.xticks(rotation=30, ha='right')
 
 #st.write('Input banyak negara dan tahun di kiri')
-left_col.pyplot(plt)
+col1.pyplot(plt)
 
 #bagian c
 #col3
-st.write()
-right_col.subheader("Bagian C")
-right_col.subheader('Jumlah Produksi Terbesar Kumulatif Keseluruhan Tahun')
+col2.header("Bagian C")
+col2.subheader('Jumlah Produksi Terbesar Kumulatif Keseluruhan Tahun')
 
 B_ = st.sidebar.number_input("Banyak negara dengan produksi terbesar kumulatif (Bagian C)", min_value=1, max_value=None)
 
@@ -190,7 +189,7 @@ plt.ylabel('produksi_total')
 plt.xticks(rotation=30, ha='right')
 
 st.write('Input banyak negara di sidebar kiri (Bagian C)')
-right_col.pyplot(plt)
+col2.pyplot(plt)
 
 #bagian d
 st.write()
