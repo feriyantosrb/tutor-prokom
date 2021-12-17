@@ -51,7 +51,7 @@ class jsonHandler:
 left_col, mid_col, right_col = st.columns(3)
 
 st.title('PRODUKSI MINYAK MENTAH')
-st.header('Feriyanto 12220007')
+#st.header('Feriyanto 12220007')
 ch_ = csvHandler('produksi_minyak_mentah.csv')
 jh_ = jsonHandler('kode_negara_lengkap.json')
 
@@ -59,7 +59,7 @@ st.sidebar.title("Pengaturan")
 
 #bagian a
 #col1
-
+left_col.subheader('Bagian A')
 df_ = ch_.dataFrame
 df_info = jh_.dataFrame
 negara_li = df_info['name'].tolist()
@@ -69,8 +69,8 @@ negara = left_col.selectbox('Pilih negara : ',negara_li)
 kode = df_info[df_info['name']==negara]['alpha-3'].tolist()[0]
 
 
-st.write('Kode negara : ',kode)
-st.write('Negara : ',negara)
+#st.write('Kode negara : ',kode)
+#st.write('Negara : ',negara)
 
 x_ = df_[df_['kode_negara']==kode]['tahun'].tolist()
 y_ = df_[df_['kode_negara']==kode]['produksi'].tolist()
@@ -97,11 +97,11 @@ if plotting == 'tipe 1':
     plt.xlabel('Tahun')
     plt.ylabel('Produksi')
     plt.legend()
-    st.pyplot(plt)
+    left_col.pyplot(plt)
 else:
     dic['trendline'] = y_trend
-    fig = px.scatter(pd.DataFrame(dic),x='tahun {}'.format(fontsize=12),y='produksi {}'.format(fontsize=12),trendline='lowess',trendline_options=dict(frac=0.1),title='Data Produksi {}'.format(negara,fontsize=18,align="center"))
-    st.plotly_chart(fig)
+    fig = px.scatter(pd.DataFrame(dic),x='tahun',y='produksi',trendline='lowess',trendline_options=dict(frac=0.1),title='Data Produksi {}'.format(negara))
+    left_col.plotly_chart(fig)
 
 #bagian b
 #col2
@@ -147,7 +147,7 @@ plt.xlabel('negara')
 plt.ylabel('produksi_maksimum')
 plt.xticks(rotation=30, ha='right')
 
-st.write('Input banyak negara dan tahun di kiri')
+#st.write('Input banyak negara dan tahun di kiri')
 mid_col.pyplot(plt)
 
 #bagian c
