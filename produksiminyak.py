@@ -188,17 +188,15 @@ plt.grid(True, color="grey", linewidth="0.7", linestyle="-.", zorder=0)
 #plt.xlabel()
 plt.ylabel('produksi_total')
 plt.xticks(rotation=30, ha='right')
-
-st.write('Input banyak negara di sidebar kiri (Bagian C)')
 col2.pyplot(plt)
 
 #bagian d
 st.write()
 st.write()
 st.header('Bagian D')
-st.subheader('INFORMASI')
+st.subheader('Summary')
 
-T_ = st.sidebar.number_input("Summary Tahun Produksi", min_value=1971, max_value=2015)
+T_ = st.sidebar.number_input("Summary Tahun Produksi (Bagian D)", min_value=1971, max_value=2015)
 
 df = ch_.dataFrame
 dfJ = jh_.dataFrame
