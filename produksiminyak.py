@@ -90,7 +90,7 @@ if kode in x_:
     right_col.subheader('Grafik Data Produksi')
     right_col.plotly_chart(fig)
 else:
-    st.write('Data tidak ditemukan')
+    st.error('Data Produksi ',negara, 'tidak ditemukan!')
 
 #bagian b
 #col2
