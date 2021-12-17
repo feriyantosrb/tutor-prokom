@@ -6,6 +6,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import matplotlib.pyplot as plt
 import json
+from PIL import Image
 
 #start handler
 class csvHandler:
@@ -55,9 +56,10 @@ st.title('PRODUKSI MINYAK MENTAH')
 ch_ = csvHandler('produksi_minyak_mentah.csv')
 jh_ = jsonHandler('kode_negara_lengkap.json')
 
+#Sidebar pengaturan
+image = Image.open('itb.png')
+st.sidebar.image(image)
 st.sidebar.title("Pengaturan")
-
-
 
 #bagian a
 st.header('Bagian A')
@@ -94,8 +96,7 @@ left_col.dataframe(dic)
 #plotting = left_col.selectbox('Pilih tipe plotting : ',['tipe 1','tipe 2'])
 
 dic['trendline'] = y_trend
-fig = px.scatter(pd.DataFrame(dic),x='tahun',y='produksi',trendline='lowess',trendline_options=dict(frac=0.1),title='Data Produksi {}'.format(negara))
-right_col.subheader('Data Produksi',negara)
+fig = px.scatter(pd.DataFrame(dic),x='tahun',y='produksi',trendline='lowess',trendline_options=dict(frac=0.1))
 right_col.subheader('Grafik Data Produksi')
 right_col.plotly_chart(fig)
 
