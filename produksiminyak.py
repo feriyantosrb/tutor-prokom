@@ -130,7 +130,7 @@ plt.clf() # clear the figure
 
 plt.title('{B} Negara dengan Produksi Terbesar pada Tahun {T}'.format(B=B,T=T))
 plt.bar(df__['negara'][:B],df__['produksi_maks'][:B],width=0.9, bottom=None, align="center",
-            color="green", edgecolor="aquamarine", data=None, zorder=3)
+            color="orange", edgecolor="yellow", data=None, zorder=3)
 plt.grid(True, color="grey", linewidth="0.7", linestyle="-.", zorder=0)
 #plt.xlabel()
 plt.ylabel('produksi_maksimum')
@@ -172,7 +172,7 @@ plt.clf() # clear the figure
 
 plt.title('{B} Negara dengan Produksi Terbesar Kumulatif'.format(B=B_))
 plt.bar(df__['negara'][:B_],df__['produksi_total'][:B_],width=0.9, bottom=None, align="center",
-            color="green", edgecolor="aquamarine", data=None, zorder=3)
+            color="orange", edgecolor="yellow", data=None, zorder=3)
 plt.grid(True, color="grey", linewidth="0.7", linestyle="-.", zorder=0)
 plt.ylabel('produksi_total')
 plt.xticks(rotation=30, ha='right')
