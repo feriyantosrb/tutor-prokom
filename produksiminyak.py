@@ -51,7 +51,7 @@ class jsonHandler:
 
 st.set_page_config(layout="wide")
 
-st.title('PRODUKSI MINYAK MENTAH',align=center)
+st.title('PRODUKSI MINYAK MENTAH')
 #st.header('Feriyanto 12220007')
 ch_ = csvHandler('produksi_minyak_mentah.csv')
 jh_ = jsonHandler('kode_negara_lengkap.json')
